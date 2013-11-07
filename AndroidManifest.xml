@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.stefansundin.glass.movies"
-    android:versionCode="1"
-    android:versionName="1.0" >
+          package="com.stefansundin.glass.movies"
+          android:versionCode="1"
+          android:versionName="1.0">
 
-    <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="15" />
+	<uses-sdk
+		android:minSdkVersion="15"
+		android:targetSdkVersion="15"/>
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+	<application
+		android:allowBackup="true"
+		android:label="@string/app_name"
+		android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+		<activity
+			android:name=".MainActivity"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+
+		<receiver android:name="com.stefansundin.glass.BlockLongTapReceiver">
+			<intent-filter android:priority="1000">
+				<action android:name="com.google.glass.action.LONG_PRESS"/>
+			</intent-filter>
+		</receiver>
+	</application>
 
 </manifest>

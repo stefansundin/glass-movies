@@ -1,6 +1,7 @@
 package com.stefansundin.glass.movies;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,7 +36,7 @@ public class MainActivity extends Activity
 		mListView.setAdapter(mMovieList);
 
 		mMovieDirectory = Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_MOVIES;
-		//Log.d("stefan", "Movie directory: "+mMovieDirectory);
+		Log.d("stefan", "Movie directory: "+mMovieDirectory);
 
 		ArrayList<String> filenames = new ArrayList<String>();
 		File dir = new File(mMovieDirectory);
