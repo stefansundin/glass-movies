@@ -1,5 +1,7 @@
 # glass-movies
 
+**Note: This app was written for XE10. I have not tried it with XE11.**
+
 Google Glass allows you to watch videos that you have recorded with the built-in video, but it does not allow you to watch video files that you transfer to the device. This app solves that problem.
 
 **Warning:** Watching your glass screen for extended periods of time is probably not good for your eyes. Get a real monitor dangit!
