@@ -1,28 +1,28 @@
 package com.stefansundin.glass.movies;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.glass.touchpad.GestureDetector;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity
 		implements TextToSpeech.OnInitListener {
-
 	public MainActivity mActivity;
 
 	private String mMovieDirectory;
 	private ListView mListView;
 	private ArrayAdapter<String> mMovieList;
+	private GestureDetector mGestureDetector;
 	private TextToSpeech mSpeech;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,34 @@ public class MainActivity extends Activity
 			mMovieList.add(filename);
 		}
 
-		mListView.setOnItemClickListener(new VideoLauncher());
-
 		mSpeech = new TextToSpeech(this, this);
+
+		Touchpad touchpad = new Touchpad(mListView, this);
+		mGestureDetector = new GestureDetector(this);
+		mGestureDetector.setBaseListener(touchpad);
+		mGestureDetector.setFingerListener(touchpad);
+		mGestureDetector.setScrollListener(touchpad);
+	}
+
+	public boolean onGenericMotionEvent(MotionEvent event) {
+		if (mGestureDetector != null) {
+			return mGestureDetector.onMotionEvent(event);
+		}
+		return false;
+	}
+
+	public void say(String filename) {
+		String text = filename.substring(0, filename.lastIndexOf("."));
+		mSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+		Log.d("stefan", "Saying: "+text);
+	}
+
+	public void launchVideo(String filename) {
+		say(filename);
+		Intent i = new Intent();
+		i.setAction("com.google.glass.action.VIDEOPLAYER");
+		i.putExtra("video_url", mMovieDirectory+"/"+filename);
+		startActivity(i);
 	}
 
 	public void onInit(int status) {
@@ -61,24 +86,6 @@ public class MainActivity extends Activity
 	protected void onDestroy() {
 		super.onDestroy();
 		mSpeech.shutdown();
-	}
-
-	public void launchVideo(String filename) {
-		Log.d("stefan", "Launching: "+filename);
-
-		String say = filename.substring(0, filename.lastIndexOf("."));
-		mSpeech.speak(say, TextToSpeech.QUEUE_FLUSH, null);
-
-		Intent i = new Intent();
-		i.setAction("com.google.glass.action.VIDEOPLAYER");
-		i.putExtra("video_url", mMovieDirectory+"/"+filename);
-		startActivity(i);
-	}
-
-	private class VideoLauncher implements AdapterView.OnItemClickListener {
-		public void onItemClick(AdapterView parent, View v, int position, long id) {
-			mActivity.launchVideo(parent.getSelectedItem().toString());
-		}
 	}
 
 }
