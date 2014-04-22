@@ -17,23 +17,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity
 		implements TextToSpeech.OnInitListener {
-	public MainActivity mActivity;
 
 	private String mMovieDirectory;
-	private ListView mListView;
-	private ArrayAdapter<String> mMovieList;
 	private GestureDetector mGestureDetector;
 	private TextToSpeech mSpeech;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout);
-		mActivity = this;
 
-		mListView = (ListView) findViewById(R.id.listView);
-
-		mMovieList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-		mListView.setAdapter(mMovieList);
+		ArrayAdapter<String> movieList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+		ListView listView = (ListView) findViewById(R.id.listView);
+		listView.setAdapter(movieList);
 
 		mMovieDirectory = Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_MOVIES;
 		Log.d("stefan", "Movie directory: "+mMovieDirectory);
@@ -46,12 +41,12 @@ public class MainActivity extends Activity
 		}
 		java.util.Collections.sort(filenames);
 		for (String filename : filenames) {
-			mMovieList.add(filename);
+			movieList.add(filename);
 		}
 
 		mSpeech = new TextToSpeech(this, this);
 
-		Touchpad touchpad = new Touchpad(mListView, this);
+		Touchpad touchpad = new Touchpad(listView, this);
 		mGestureDetector = new GestureDetector(this);
 		mGestureDetector.setBaseListener(touchpad);
 		mGestureDetector.setFingerListener(touchpad);
