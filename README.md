@@ -12,7 +12,7 @@ Google Glass allows you to watch videos that you have recorded with the built-in
 2. Download [glass-movies.apk](https://github.com/stefansundin/glass-movies/releases/download/v0.2/glass-movies.apk).
 3. Install the apk with `adb`.
 4. Transfer video files to `/mnt/sdcard/Movies/`.
-5. Launch the app, __ok glass, start movies__.
+5. Launch the app, ___ok glass, start movies___.
 6. Watch your video and enjoy.
 
 ```bash
@@ -37,12 +37,14 @@ adb shell rm "/mnt/sdcard/Movies/PSY - GANGNAM STYLE.mp4"
 
 ## Pictures
 
+Launch with ___ok glass, start movies___.
+
+![screen1](/doc/screen1.png "ok glass, start movies")
+
 Find a video that you transferred. I transferred a bunch of trailers and a few music videos.
-![screen4](/doc/screen4.png "Launch a video")
+
+![screen2](/doc/screen2.png "Launch a video")
 
 Enjoy!
 
-![screen5](/doc/screen5.png "GANGNAM STYLE")
-
-
-
+![screen3](/doc/screen3.png "GANGNAM STYLE")
