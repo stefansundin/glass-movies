@@ -1,6 +1,6 @@
 # glass-movies
 
-**Note: This app was written for XE10. I have not tried it with XE11.**
+**Note: This app has been tested with XE16.11.**
 
 Google Glass allows you to watch videos that you have recorded with the built-in video, but it does not allow you to watch video files that you transfer to the device. This app solves that problem.
 
@@ -8,28 +8,24 @@ Google Glass allows you to watch videos that you have recorded with the built-in
 
 ## How to install
 
-First I recommend you to get [Launchy](https://github.com/kaze0/launchy), an app launcher for Glass.
-
-1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right___ → Turn on debug.
-2. Download [glass-movies.apk](https://github.com/stefansundin/glass-movies/releases/download/0.1/glass-movies.apk).
+1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right twice___ → Turn on debug.
+2. Download [glass-movies.apk](https://github.com/stefansundin/glass-movies/releases/download/v0.2/glass-movies.apk).
 3. Install the apk with `adb`.
 4. Transfer video files to `/mnt/sdcard/Movies/`.
-5. Launch the app.
+5. Launch the app, __ok glass, start movies__.
 6. Watch your video and enjoy.
 
 ```bash
-wget https://github.com/stefansundin/glass-movies/releases/download/0.1/glass-movies.apk
+wget https://github.com/stefansundin/glass-movies/releases/download/v0.2/glass-movies.apk
 adb install glass-movies.apk
 adb push "PSY - GANGNAM STYLE.mp4" /mnt/sdcard/Movies/
-adb shell am start -n com.stefansundin.glass.movies/.MainActivity
 ```
 
-I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360. The volume seems quite high too, and for some reason the lowest volume you can set Glass to is 11%.
+I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360. The volume seems quite high too.
 
 To uninstall:
 ```bash
 adb uninstall com.stefansundin.glass.movies
-adb uninstall com.mikedg.android.glass.launchy
 ```
 
 Handy commands:
@@ -40,13 +36,6 @@ adb shell rm "/mnt/sdcard/Movies/PSY - GANGNAM STYLE.mp4"
 ```
 
 ## Pictures
-
-Launch Settings to start Launchy.
-![screen1](/doc/screen1.png "Settings")
-
-Find ___Movies___ and launch this app.
-![screen2](/doc/screen2.png "Launchy")
-![screen3](/doc/screen3.png "Launch Movies")
 
 Find a video that you transferred. I transferred a bunch of trailers and a few music videos.
 ![screen4](/doc/screen4.png "Launch a video")
