@@ -43,6 +43,7 @@ public class MainActivity extends Activity
 		for (String filename : filenames) {
 			movieList.add(filename);
 		}
+		listView.setSelection(0);
 
 		mSpeech = new TextToSpeech(this, this);
 
