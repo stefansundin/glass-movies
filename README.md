@@ -6,6 +6,7 @@ Google Glass allows you to watch videos that you have recorded with the built-in
 
 **Warning:** Watching your glass screen for extended periods of time is probably not good for your eyes. Get a real monitor dangit!
 
+
 ## How to install
 
 1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right twice___ → Turn on debug.
@@ -34,6 +35,12 @@ adb shell df
 adb shell ls /mnt/sdcard/Movies/
 adb shell rm "/mnt/sdcard/Movies/PSY - GANGNAM STYLE.mp4"
 ```
+
+
+## Author
+
+Made by Stefan Sundin. Show your appreciation by [donating](http://stefansundin.com/donate).
+
 
 ## Pictures
 
