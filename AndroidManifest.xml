@@ -22,13 +22,6 @@
 			</intent-filter>
 			<meta-data android:name="com.google.android.glass.VoiceTrigger" android:resource="@xml/start_movies" />
 		</activity>
-
-		<receiver android:name="com.stefansundin.glass.IntentBlocker">
-			<intent-filter android:priority="1000">
-				<action android:name="com.google.glass.action.EYE_GESTURE"/>
-			</intent-filter>
-		</receiver>
-
 	</application>
 
 </manifest>

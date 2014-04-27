@@ -1,7 +1,10 @@
 package com.stefansundin.glass.movies;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
@@ -21,6 +24,7 @@ public class MainActivity extends Activity
 	private String mMovieDirectory;
 	private GestureDetector mGestureDetector;
 	private TextToSpeech mSpeech;
+	private BroadcastReceiver mIntentBlocker;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +56,17 @@ public class MainActivity extends Activity
 		mGestureDetector.setBaseListener(touchpad);
 		mGestureDetector.setFingerListener(touchpad);
 		mGestureDetector.setScrollListener(touchpad);
+
+		// Block wink gesture
+		mIntentBlocker = new BroadcastReceiver() {
+			public void onReceive(Context context, Intent intent) {
+				abortBroadcast();
+				Log.d("stefan", "Blocking intent.");
+			}
+		};
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("com.google.glass.action.EYE_GESTURE");
+		registerReceiver(mIntentBlocker, filter);
 	}
 
 	public boolean onGenericMotionEvent(MotionEvent event) {
@@ -80,8 +95,10 @@ public class MainActivity extends Activity
 	}
 
 	protected void onDestroy() {
+		Log.d("stefan", "Exiting app");
 		super.onDestroy();
 		mSpeech.shutdown();
+		unregisterReceiver(mIntentBlocker);
 	}
 
 }
