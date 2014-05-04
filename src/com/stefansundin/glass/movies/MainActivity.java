@@ -29,36 +29,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout);
 
-		ArrayAdapter<String> movieList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-		ListView listView = (ListView) findViewById(R.id.listView);
-		listView.setAdapter(movieList);
-
-		mMovieDirectory = Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_MOVIES;
-		Log.d("stefan", "Movie directory: "+mMovieDirectory);
-
-		ArrayList<String> filenames = new ArrayList<String>();
-		File dir = new File(mMovieDirectory);
-		File[] files = dir.listFiles();
-		for (File file : files) {
-			filenames.add(file.getName());
-		}
-		java.util.Collections.sort(filenames);
-		for (String filename : filenames) {
-			movieList.add(filename);
-		}
-		listView.setSelection(0);
-
 		mSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
 			public void onInit(int status) {
 				// Must be declared for TTS
 			}
 		});
-
-		Touchpad touchpad = new Touchpad(listView, this);
-		mGestureDetector = new GestureDetector(this);
-		mGestureDetector.setBaseListener(touchpad);
-		mGestureDetector.setFingerListener(touchpad);
-		mGestureDetector.setScrollListener(touchpad);
 
 		// Block wink gesture
 		mIntentBlocker = new BroadcastReceiver() {
@@ -70,6 +45,38 @@ public class MainActivity extends Activity {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction("com.google.glass.action.EYE_GESTURE");
 		registerReceiver(mIntentBlocker, filter);
+
+		ArrayAdapter<String> movieList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+		ListView listView = (ListView) findViewById(R.id.listView);
+		listView.setAdapter(movieList);
+
+		mMovieDirectory = Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_MOVIES;
+		Log.d("stefan", "Movie directory: "+mMovieDirectory);
+
+		File dir = new File(mMovieDirectory);
+		File[] files = dir.listFiles();
+		if (files.length == 0) {
+			String error = "Yo, get some video files first";
+			movieList.add(error);
+			say(error);
+		}
+		else {
+			ArrayList<String> filenames = new ArrayList<String>();
+			for (File file : files) {
+				filenames.add(file.getName());
+			}
+			java.util.Collections.sort(filenames);
+			for (String filename : filenames) {
+				movieList.add(filename);
+			}
+			listView.setSelection(0);
+		}
+
+		Touchpad touchpad = new Touchpad(listView, this);
+		mGestureDetector = new GestureDetector(this);
+		mGestureDetector.setBaseListener(touchpad);
+		mGestureDetector.setFingerListener(touchpad);
+		mGestureDetector.setScrollListener(touchpad);
 	}
 
 	public boolean onGenericMotionEvent(MotionEvent event) {
@@ -80,16 +87,25 @@ public class MainActivity extends Activity {
 	}
 
 	public void say(String filename) {
-		String text = filename.substring(0, filename.lastIndexOf("."));
-		mSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-		Log.d("stefan", "Saying: "+text);
+		int dot = filename.lastIndexOf(".");
+		if (dot != -1) {
+			filename = filename.substring(0, dot);
+		}
+		mSpeech.speak(filename, TextToSpeech.QUEUE_FLUSH, null);
+		Log.d("stefan", "Saying: "+filename);
 	}
 
 	public void launchVideo(String filename) {
 		say(filename);
+		String path = mMovieDirectory+"/"+filename;
+		File file = new File(path);
+		if (!file.exists()) {
+			return;
+		}
+
 		Intent i = new Intent();
 		i.setAction("com.google.glass.action.VIDEOPLAYER");
-		i.putExtra("video_url", mMovieDirectory+"/"+filename);
+		i.putExtra("video_url", path);
 		startActivity(i);
 	}
 

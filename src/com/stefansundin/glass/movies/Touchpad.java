@@ -1,6 +1,5 @@
 package com.stefansundin.glass.movies;
 
-import android.util.Log;
 import android.widget.ListView;
 
 import com.google.android.glass.touchpad.Gesture;
@@ -24,9 +23,9 @@ public class Touchpad implements
 	public boolean onGesture(Gesture gesture) {
 		Object item = mListView.getSelectedItem();
 		if (item == null) {
-			Log.d("stefan", "null pointer!");
 			return false;
 		}
+
 		String filename = item.toString();
 		if (gesture == Gesture.TAP) {
 			mActivity.launchVideo(filename);
@@ -53,12 +52,12 @@ public class Touchpad implements
 
 	public boolean onScroll(float displacement, float delta, float velocity) {
 		//Log.d("stefan", "onScroll("+displacement+", "+delta+", "+velocity+")");
-		Log.d("stefan", "pos: "+mListView.getSelectedItemPosition());
 		if (mListView.getSelectedItemPosition() == -1) {
+			// This happens sometimes and I don't know why!
 			mListView.setSelection(0);
-			Log.d("stefan", "Set selection to 0");
 			return false;
 		}
+
 		if (Math.abs(displacement-lastDisplacement) > THRESHOLD) {
 			if (displacement > lastDisplacement) {
 				mListView.setSelection(mListView.getSelectedItemPosition()+1);
@@ -70,10 +69,6 @@ public class Touchpad implements
 			return true;
 		}
 		return false;
-	}
-
-	private void ensureSelected() {
-
 	}
 
 }
