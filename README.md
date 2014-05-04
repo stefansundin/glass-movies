@@ -64,7 +64,7 @@ Enjoy!
 
 **Version 0.3** - 2014-05-03:
 - Only block wink when running the app, not afterwards. (facepalm)
-- Hopefully fix crashing when the first list item for some reason wasn't selected on startup.
+- Hopefully fix crashing when the first list item for some reason sometimes wasn't automatically selected on startup.
 
 **Version 0.2** - 2014-04-25:
 - Updated for XE16.11.
