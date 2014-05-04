@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Movies</string>
-    <string name="glass_voice_trigger">Start Movies</string>
+    <string name="glass_voice_trigger">Start a movie</string>
 </resources>

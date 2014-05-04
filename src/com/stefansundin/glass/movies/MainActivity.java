@@ -18,8 +18,7 @@ import com.google.android.glass.touchpad.GestureDetector;
 import java.io.File;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity
-		implements TextToSpeech.OnInitListener {
+public class MainActivity extends Activity {
 
 	private String mMovieDirectory;
 	private GestureDetector mGestureDetector;
@@ -49,7 +48,11 @@ public class MainActivity extends Activity
 		}
 		listView.setSelection(0);
 
-		mSpeech = new TextToSpeech(this, this);
+		mSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+			public void onInit(int status) {
+				// Must be declared for TTS
+			}
+		});
 
 		Touchpad touchpad = new Touchpad(listView, this);
 		mGestureDetector = new GestureDetector(this);
@@ -88,10 +91,6 @@ public class MainActivity extends Activity
 		i.setAction("com.google.glass.action.VIDEOPLAYER");
 		i.putExtra("video_url", mMovieDirectory+"/"+filename);
 		startActivity(i);
-	}
-
-	public void onInit(int status) {
-		// Must be declared for TTS
 	}
 
 	protected void onDestroy() {
