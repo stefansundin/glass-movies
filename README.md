@@ -24,12 +24,18 @@ adb install glass-movies.apk
 adb push "PSY - GANGNAM STYLE.mp4" /mnt/sdcard/Movies/
 ```
 
-I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360. The volume seems quite high too.
-
 To uninstall:
 ```bash
 adb uninstall com.stefansundin.glass.movies
 ```
+
+I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360. The volume seems quite high too.
+
+If you happen to have big 1080p videos that take up a bit too much space for comfort, you can easily resize and recompress it with ffmpeg ([more info](https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg)):
+```bash
+ffmpeg -i input.mp4 -vf scale=640,-1 resized-for-glass.mp4
+```
+
 
 Handy commands:
 ```bash
