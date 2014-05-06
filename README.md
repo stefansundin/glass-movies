@@ -33,7 +33,7 @@ I have found that Glass can play HD fine, even though the actual screen resoluti
 
 If you happen to have big 1080p videos that take up a bit too much space for comfort, you can easily resize and recompress it with ffmpeg ([more info](https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg)):
 ```bash
-ffmpeg -i input.mp4 -vf scale=640,-1 resized-for-glass.mp4
+ffmpeg -i input.mp4 -vf scale=640:-1 resized-for-glass.mp4
 ```
 
 
