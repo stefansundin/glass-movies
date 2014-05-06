@@ -29,7 +29,7 @@ To uninstall:
 adb uninstall com.stefansundin.glass.movies
 ```
 
-I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360. The volume seems quite high too.
+I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360 (16:9). The volume seems quite high too.
 
 If you happen to have big 1080p videos that take up a bit too much space for comfort, you can easily resize and recompress it with ffmpeg ([more info](https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg)):
 ```bash
