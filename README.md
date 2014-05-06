@@ -13,7 +13,7 @@ This app will block the wink gesture while you're inside the app, so you don't a
 
 1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right twice___ → Turn on debug.
 2. Download [glass-movies.apk](https://github.com/stefansundin/glass-movies/releases/download/v0.3/glass-movies.apk).
-3. Install the apk with `adb`.
+3. Install the apk with [`adb`](http://developer.android.com/sdk/).
 4. Transfer video files to `/mnt/sdcard/Movies/`.
 5. Launch the app, ___ok glass, start a movie___.
 6. Watch your video and enjoy.
