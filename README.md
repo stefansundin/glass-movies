@@ -51,6 +51,11 @@ adb shell am force-stop com.stefansundin.glass.movies
 Made by Stefan Sundin. Show your appreciation by [donating](http://stefansundin.com/donate).
 
 
+# Discuss
+
+Post [in my subreddit](http://www.reddit.com/r/stefansundin/) to discuss!
+
+
 ## Pictures
 
 Launch with ___ok glass, start a movie___.
