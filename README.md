@@ -1,6 +1,6 @@
 # glass-movies
 
-**Note: This app has been tested with XE16.2.**
+**Note: This app has been tested with XE17.1, but this update broke the wink gesture blocker. If anyone knows how to get it working again, let me know.**
 
 Google Glass allows you to watch videos that you have recorded with the camera, but it does not allow you to watch video files that you transfer to the device. This app solves that problem.
 
@@ -11,7 +11,7 @@ This app will block the wink gesture while you're inside the app, so you don't a
 
 ## How to install
 
-1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right twice___ → Turn on debug.
+1. Enable debug mode on your Glass, you can find this in Settings → Device info → ___swipe right three times___ → Turn on debug.
 2. Download [glass-movies.apk](https://github.com/stefansundin/glass-movies/releases/download/v0.3/glass-movies.apk).
 3. Install the apk with [`adb`](http://developer.android.com/sdk/).
 4. Transfer video files to `/mnt/sdcard/Movies/`.
