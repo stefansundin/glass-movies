@@ -29,13 +29,6 @@ To uninstall:
 adb uninstall com.stefansundin.glass.movies
 ```
 
-I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360 (16:9). The volume seems quite high too.
-
-If you happen to have big 1080p videos that take up a bit too much space for comfort, you can easily resize and recompress it with ffmpeg ([more info](https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg)):
-```bash
-ffmpeg -i input.mp4 -vf scale=640:-1 resized-for-glass.mp4
-```
-
 
 Handy commands:
 ```bash
@@ -44,6 +37,23 @@ adb shell ls /mnt/sdcard/Movies/
 adb shell rm "/mnt/sdcard/Movies/PSY - GANGNAM STYLE.mp4"
 adb shell am force-stop com.stefansundin.glass.movies
 ```
+
+
+### Mini-encoding guide
+
+I have found that Glass can play HD fine, even though the actual screen resolution of Glass is 640×360 (16:9).
+
+If you happen to have big 1080p videos that take up a bit too much space for comfort, you can easily resize and recompress it with ffmpeg ([more info](https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg)):
+```bash
+ffmpeg -i input.mp4 -vf scale=640:-1 resized-for-glass.mp4
+```
+
+Glass doesn't play flv or mkv files, you have to convert them to mp4.
+```bash
+ffmpeg -i file.mkv -c copy file.mp4
+```
+
+You can downmix 5.1 audio to 2 channels with `-ac 2`, this saves space. Also note that Glass doesn't play vorbis.
 
 
 ## Author
