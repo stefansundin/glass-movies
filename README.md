@@ -1,6 +1,6 @@
 # glass-movies
 
-**Note: This app has been tested with XE17.1, but this update broke the wink gesture blocker. If anyone knows how to get it working again, let me know.**
+**Note: This app has been tested with XE18.1 and works. The XE17.1 update broke the wink gesture blocker. If anyone knows how to get it working again, let me know.**
 
 Google Glass allows you to watch videos that you have recorded with the camera, but it does not allow you to watch video files that you transfer to the device. This app solves that problem.
 
